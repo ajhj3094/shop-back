@@ -23,10 +23,47 @@ export const getProducts = async (req, res) => {
   }
 }
 
+export const getMale = async (req, res) => {
+  try {
+    const result = await products.find({ sell: true, gender: '男生' })
+    res.status(200).send({ success: true, message: '', result })
+  } catch (error) {
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
+
+export const getFemale = async (req, res) => {
+  try {
+    const result = await products.find({ sell: true, gender: '女生' })
+    res.status(200).send({ success: true, message: '', result })
+  } catch (error) {
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
+
 export const getAllProducts = async (req, res) => {
   try {
     const result = await products.find()
     res.status(200).send({ success: true, message: '', result })
+  } catch (error) {
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
+
+export const getCategoryProducts = async (req, res) => {
+  try {
+    let cate = ''
+    let gen = ''
+    if (req.params.id === 'hiking') { cate = '登山健行' }
+    if (req.params.id === 'ski') { cate = '滑雪' }
+    if (req.params.id === 'coat') { cate = '外套' }
+    if (req.params.id === 'male') { gen = '男生' }
+    if (req.params.id === 'female') { gen = '女生' }
+    if (req.params.id === 'camping') { cate = '露營' }
+    if (req.params.id === 'undefined') { cate = '購物商城' }
+
+    const result = await products.find({ category: cate, sell: true })
+    res.status(200).send({ success: true, message: '', result, category: cate, gender: gen })
   } catch (error) {
     res.status(500).send({ success: false, message: '伺服器錯誤' })
   }

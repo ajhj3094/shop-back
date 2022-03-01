@@ -10,7 +10,10 @@ import {
   getProductById,
   updateProductById,
   searchProducts,
-  addreviewById
+  addreviewById,
+  getCategoryProducts,
+  getMale,
+  getFemale
 } from '../controllers/products.js'
 
 const router = express.Router()
@@ -20,6 +23,9 @@ router.post('/search', searchProducts)
 router.post('/:id', auth, addreviewById)
 router.get('/', getProducts)
 router.get('/all', auth, admin, getAllProducts)
+router.get('/cate/:id', getCategoryProducts)
+router.get('/male', getMale)
+router.get('/female', getFemale)
 router.get('/:id', getProductById)
 router.patch('/:id', auth, admin, content('multipart/form-data'), upload, updateProductById)
 
