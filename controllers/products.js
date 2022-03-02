@@ -95,6 +95,7 @@ export const updateProductById = async (req, res) => {
     category: req.body.category,
     gender: req.body.gender,
     color: req.body.color,
+    coloroptions: req.body.coloroptions,
     size: req.body.size
   }
 
